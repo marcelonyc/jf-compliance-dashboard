@@ -1,0 +1,14 @@
+dash==2.17.1
+dash-bootstrap-components==1.6.0
+alembic==1.13.2
+pyyaml==6.0.1
+python-dotenv==1.0.1
+fastapi==0.112.0
+sqlalchemy==2.0.31
+aiosqlite==0.20.0
+iso8601==2.1.0
+fastapi-cli==0.0.5
+email_validator==2.2.0
+gunicorn[gevent]==23.0.0
+setuptools==70.0.0
+sqlmodel==0.0.22
