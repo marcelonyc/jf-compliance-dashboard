@@ -25,7 +25,6 @@ target_metadata = None
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
-print("Running migrations offline: {}".format(get_settings().db_url))
 sync_db_url = get_settings().db_url.replace("+aiosqlite", "")
 config.set_main_option("sqlalchemy.url", sync_db_url)
 
