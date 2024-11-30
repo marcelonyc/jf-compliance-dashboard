@@ -105,18 +105,3 @@ if "sqlite" in DATABASE_URL:
     json_type = JSON
 else:
     json_type = JSONB
-
-users = Table(
-    "users",
-    metadata,
-    Column("name", String, nullable=False),
-    Column("email", String, nullable=False),
-    Column("id", String, primary_key=True, nullable=False),
-    Column("username", String, nullable=False, unique=True),
-    Column("salt", LargeBinary, nullable=False),
-    Column("hashed_token", LargeBinary, nullable=False),
-    Column("description", String, nullable=False),
-    Column("created_at", DateTime, nullable=False, default=func.now()),
-    Column("updated_at", DateTime, nullable=False, default=func.now()),
-    mustexist=False,
-)

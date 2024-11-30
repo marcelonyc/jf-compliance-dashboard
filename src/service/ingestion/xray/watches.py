@@ -36,7 +36,6 @@ def get_all_watches():
         try:
             database.sm_add(watch_record)
         except IntegrityError as e:
-            print("Integrity Error", e)
             database.execute_sync(
                 update(Watches)
                 .where(Watches.name == watch_record.name)

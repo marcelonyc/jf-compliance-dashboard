@@ -26,7 +26,6 @@ def get_all_policies():
         try:
             database.sm_add(policy_record)
         except IntegrityError as e:
-            print("Integrity Error", e)
             database.execute_sync(
                 update(Policies)
                 .where(Policies.name == policy_record.name)

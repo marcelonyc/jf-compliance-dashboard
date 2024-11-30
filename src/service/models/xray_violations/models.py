@@ -25,3 +25,8 @@ class Model(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
     total_violations: int
     violations: list = Field(sa_type=json_type)
+
+
+class Violations_Hwm_Table(SQLModel, table=True):
+    __tablename__ = "violations_hwm"
+    created_hwm: datetime | None = Field(default=None, primary_key=True)

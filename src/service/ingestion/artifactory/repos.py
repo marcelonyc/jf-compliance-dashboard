@@ -24,25 +24,35 @@ def get_all_artifactory_repos():
     all_repos = ArtifactoryModel(**repos)
     for _repo in all_repos.LOCAL:
         database.execute_sync(
-            insert(local_item_table).values(_repo.model_dump())
+            insert(local_item_table)
+            .values(_repo.model_dump())
+            .returning(local_item_table.c.key)
         )
 
     for _repo in all_repos.REMOTE:
         database.execute_sync(
-            insert(remote_item_table).values(_repo.model_dump())
+            insert(remote_item_table)
+            .values(_repo.model_dump())
+            .returning(remote_item_table.c.key)
         )
 
     for _repo in all_repos.VIRTUAL:
         database.execute_sync(
-            insert(virtual_item_table).values(_repo.model_dump())
+            insert(virtual_item_table)
+            .values(_repo.model_dump())
+            .returning(virtual_item_table.c.key)
         )
 
     for _repo in all_repos.FEDERATED:
         database.execute_sync(
-            insert(federated_item_table).values(_repo.model_dump())
+            insert(federated_item_table)
+            .values(_repo.model_dump())
+            .returning(federated_item_table.c.key)
         )
 
     for _repo in all_repos.RELEASE_BUNDLE:
         database.execute_sync(
-            insert(release_bundle_item_table).values(_repo.model_dump())
+            insert(release_bundle_item_table)
+            .values(_repo.model_dump())
+            .returning(release_bundle_item_table.c.key)
         )

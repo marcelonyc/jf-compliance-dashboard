@@ -38,31 +38,38 @@ from sqlmodel import (
 DATABASE_URL = str(get_settings().db_url)
 sync_db_url = DATABASE_URL.replace("+aiosqlite", "")
 if "sqlite" in DATABASE_URL:
-    engine = create_async_engine(
-        DATABASE_URL,
-        pool_pre_ping=True,
-    )
-    engine_sync = create_engine(sync_db_url)
-    engine_sm_sync = sqlmodel_create_engine(sync_db_url, echo=True)
+    # engine = create_async_engine(
+    #     DATABASE_URL,
+    #     pool_pre_ping=True,
+    #     echo=False,
+    # )
+
+    engine_sync = create_engine(sync_db_url, echo=False)
+    engine = engine_sync
+    engine_sm_sync = sqlmodel_create_engine(sync_db_url, echo=False)
 else:
-    engine = create_async_engine(
-        DATABASE_URL,
-        pool_size=1,
-        max_overflow=3,
-        pool_pre_ping=True,
-    )
+    # engine = create_async_engine(
+    #     DATABASE_URL,
+    #     pool_size=1,
+    #     max_overflow=3,
+    #     pool_pre_ping=True,
+    #     echo=False,
+    # )
 
     engine_sync = create_engine(
         sync_db_url,
         pool_size=1,
         max_overflow=3,
+        echo=False,
     )
+
+    engine = engine_sync
 
     engine_sm_sync = sqlmodel_create_engine(
         sync_db_url,
         pool_size=1,
         max_overflow=3,
-        echo=True,
+        echo=False,
     )
 
 metadata = MetaData(naming_convention=DB_NAMING_CONVENTION)

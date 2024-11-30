@@ -127,3 +127,6 @@ cython_debug/
 
 # Scraps
 scrap/
+
+# Local .env file safe to put secrets in
+docker/.env-local

@@ -1,11 +1,11 @@
-from service.models.xray_violations.models import Violations, Model
+from service.models.xray_violations.models import (
+    Violations,
+    Model,
+    Violations_Hwm_Table,
+)
 from service.lib.xray_api import get_violations
 import datetime
 from database.database import database, sqlengine_type
-from database.models.xray_violations.models import (
-    violations_table,
-    violations_hwm_table,
-)
 from sqlalchemy import select, func, delete, insert, update, and_ as _and
 from service.lib.utils import json_object_converter
 from datetime import timedelta
@@ -13,7 +13,7 @@ from datetime import timedelta
 
 def get_all_violations():
 
-    query = select(violations_hwm_table.c.created_hwm)
+    query = select(Violations_Hwm_Table.created_hwm)
     result = database.execute_sync(query)
     hwm = result.fetchone()
     hwms: datetime.datetime = (
@@ -34,7 +34,6 @@ def get_all_violations():
     filter["filters"]["created_from"] = filter["created_from"]
     filter.pop("created_from")
 
-    print("FILTER", filter)
     while True:
 
         violations = get_violations(filter)
@@ -51,15 +50,13 @@ def get_all_violations():
             hwms = violation_record.created
             database.sm_add(violation_record)
 
-        database.execute_sync(delete(violations_hwm_table))
+        database.execute_sync(delete(Violations_Hwm_Table))
 
         database.execute_sync(
-            insert(violations_hwm_table).values(
+            insert(Violations_Hwm_Table).values(
                 created_hwm=hwms + timedelta(seconds=1)
             )
         )
         offset += 1
         filter["pagination"]["offset"] = offset
         filter = json_object_converter(filter)
-
-        print(f"Offset: {offset}")

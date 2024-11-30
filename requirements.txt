@@ -12,3 +12,8 @@ email_validator==2.2.0
 gunicorn[gevent]==23.0.0
 setuptools==70.0.0
 sqlmodel==0.0.22
+rq==2.0.0
+redis==5.2.0
+rq-dashboard==0.8.2.2
+rq-scheduler==0.14.0
+psycopg2-binary==2.9.6
