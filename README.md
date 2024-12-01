@@ -12,8 +12,7 @@ This project provides a scheduler to regularly download data from JFrog and Dash
 1. Clone this repo
 2. Make a copy of docker/.env as docker/.env-local (this file is included in .gitignore)
 3. Add values for JF_URL and JF_TOKEN 
-4. From the root directory run
-    a. docker compose up
+4. From the root directory run `docker compose up`
 
 * The initial start takes a few minutes. Give it 10 minutes on the first `up` before you continue
 * In some instances, Superset did not come up correctly. run `docker compose stop` and `docker compose up` to restart.
@@ -22,8 +21,8 @@ This project provides a scheduler to regularly download data from JFrog and Dash
 Once the environment is up got to http://localhost:8088
 
 Default credentials
-user: admin
-pass: admin
+- user: admin
+- pass: admin
 
 ## Import Dashboards
 
@@ -36,7 +35,7 @@ At the moment I have two dashboards:
 ![Dashboard Import](assets/import-dash.png)
 > **Figure:** Import Dashboards
 
-Enter the datbaase password. This is the value of JFROG_PASSWORD in .env-local
+Enter the database password. This is the value of JFROG_PASSWORD in .env-local
 ![Dashboard Screenshot](assets/dbpass.png)
 
 Give it a minute and navigate to Dashboards
