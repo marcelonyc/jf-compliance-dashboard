@@ -48,7 +48,7 @@ Give it a minute and navigate to Dashboards
 ![Dashboard Screenshot](assets/xray-coverage-dash.png)
 
 
-For more information on Apache Superset, visit [apache.superset.org](https://apache.superset.org).
+For more information on Apache Superset, visit [Superset](https://superset.apache.org).
 
 ## Other endpoints
 
