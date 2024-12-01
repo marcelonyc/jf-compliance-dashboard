@@ -33,7 +33,7 @@ At the moment I have two dashboards:
 
 
 
-![Dashboard Import](assets/importI.png)
+![Dashboard Import](assets/import-dash.png)
 > **Figure:** Import Dashboards
 
 Enter the datbaase password. This is the value of JFROG_PASSWORD in .env-local
