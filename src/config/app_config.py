@@ -63,11 +63,11 @@ class AppConfig:
 
             self.JF_URL = os.getenv("JF_URL")
             self.JF_TOKEN = os.getenv("JF_TOKEN")
-            self.JFROG_UPDATE_SHORT_INTERVAL = os.getenv(
-                "JFROG_UPDATE_SHORT_INTERVAL"
+            self.JFROG_UPDATE_SHORT_INTERVAL = int(
+                os.getenv("JFROG_UPDATE_SHORT_INTERVAL")
             )
-            self.JFROG_UPDATE_LONG_INTERVAL = os.getenv(
-                "JFROG_UPDATE_LONG_INTERVAL"
+            self.JFROG_UPDATE_LONG_INTERVAL = int(
+                os.getenv("JFROG_UPDATE_LONG_INTERVAL")
             )
 
 
