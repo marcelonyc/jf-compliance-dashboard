@@ -28,6 +28,7 @@ scheduler.schedule(
     scheduled_time=datetime.now(),
     func=get_all_artifactory_repos,
     interval=60 * app_settings.JFROG_UPDATE_LONG_INTERVAL,
+    timeout=60 * 10,
     ttl=6300,
     repeat=None,
 )
@@ -36,6 +37,7 @@ scheduler.schedule(
     scheduled_time=datetime.now(),
     func=get_all_watches,
     interval=60 * app_settings.JFROG_UPDATE_LONG_INTERVAL,
+    timeout=60 * 10,
     ttl=6300,
     repeat=None,
 )
@@ -44,6 +46,7 @@ scheduler.schedule(
     scheduled_time=datetime.now(),
     func=get_all_policies,
     interval=60 * app_settings.JFROG_UPDATE_LONG_INTERVAL,
+    timeout=60 * 10,
     ttl=6300,
     repeat=None,
 )
@@ -53,6 +56,7 @@ scheduler.schedule(
     func=get_all_violations,
     interval=60 * app_settings.JFROG_UPDATE_SHORT_INTERVAL,
     ttl=6300,
+    timeout=60 * 10,
     repeat=None,
 )
 

@@ -127,3 +127,5 @@ scrap/
 
 # Local .env file safe to put secrets in
 docker/.env-local
+.DS_Store
+.DS_Store
