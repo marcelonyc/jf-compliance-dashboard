@@ -129,7 +129,6 @@ class DashboardDB:
 
     def sm_add(self, obj: SQLModel) -> None:
         with Session(self.engine_sm_sync) as session:
-            print(obj.model_dump)
             session.add(obj)
             session.commit()
 
