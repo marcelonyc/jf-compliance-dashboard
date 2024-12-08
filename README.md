@@ -17,6 +17,7 @@ Table of Content
 - Watches
 - Policies
 - Violations
+- Licenses
 
 ## Setup
 
