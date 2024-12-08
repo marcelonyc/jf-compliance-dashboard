@@ -48,11 +48,14 @@ services:
       - db_home:/var/lib/postgresql/data
       - ./docker/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${JFROG_USER} -d ${JFROG_DB}"]
+      test: ["CMD-SHELL", "pg_isready -U $$JFROG_USER -d $$JFROG_DB"]
       interval: 10s
       retries: 5
       start_period: 30s
       timeout: 10s
+    ports:
+      - "5432:5432"
+      
 
   dashboard-app:
     build:

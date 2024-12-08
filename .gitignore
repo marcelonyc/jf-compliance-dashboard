@@ -129,3 +129,5 @@ scrap/
 docker/.env-local
 .DS_Store
 .DS_Store
+docker/.env-local-jfrog
+.DS_Store

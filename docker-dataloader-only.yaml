@@ -1,0 +1,62 @@
+# networks:
+#   dashboard-network:
+#     driver: bridge
+#
+x-dashboard-app-depends-on: &dashboard-app-depends-on
+  redis:
+    condition: service_started
+  jfrog_db:
+    condition: service_healthy
+    restart: true
+
+services:
+  redis:
+    image: redis:7
+    container_name: dashboard-app-redis
+    restart: unless-stopped
+    volumes:
+      - redis_db:/data
+  jfrog_db:
+    env_file:
+      - path: docker/.env # default
+        required: true
+      - path: docker/.env-local # optional override
+        required: false
+      - path: docker/.env-local-jfrog # optional override
+        required: false
+    image: postgres:15
+    container_name: dashboard-app-jfrog-db
+    restart: unless-stopped
+    volumes:
+      - jfrog_db:/var/lib/postgresql/data
+      - ./docker/jfrog-docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$JFROG_USER -d $$JFROG_DB"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
+
+  dashboard-app:
+    build:
+      context: .
+      dockerfile: docker/dataingestion.Dockerfile
+    container_name: dashboard-app
+    env_file:
+      - path: docker/.env # default
+        required: true
+      - path: docker/.env-local # optional override
+        required: false
+      - path: docker/.env-local-jfrog # optional override
+        required: false
+    depends_on: *dashboard-app-depends-on
+    ports:
+      - "9181:9181"
+
+volumes:
+  jfrog_db:
+    external: false
+  redis_db:
+    external: false
