@@ -5,8 +5,8 @@ from service.models.xray_violations.models import (
 )
 from service.lib.xray_api import get_violations
 import datetime
-from database.database import database, sqlengine_type
-from sqlalchemy import select, func, delete, insert, update, and_ as _and
+from database.database import database
+from sqlalchemy import select, delete, insert
 from service.lib.utils import json_object_converter
 from datetime import timedelta
 

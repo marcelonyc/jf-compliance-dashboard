@@ -7,6 +7,8 @@ from __future__ import annotations
 from typing import List, Optional
 
 from pydantic import BaseModel
+from sqlmodel import Field, SQLModel, ARRAY
+from datetime import date, datetime
 
 
 class LOCALItem(BaseModel):
@@ -271,3 +273,35 @@ class ArtifactRepos(BaseModel):
     VIRTUAL: List[VIRTUALItem]
     FEDERATED: List[FEDERATEDItem]
     RELEASE_BUNDLE: List[RELEASEBUNDLEItem]
+
+
+class AQLRepoResult(BaseModel):
+    repo: str
+
+
+class AQLRange(BaseModel):
+    start_pos: int
+    end_pos: int
+    total: int
+
+
+class AQLRepoNames(BaseModel):
+    results: List[AQLRepoResult]
+    range: AQLRange
+
+
+class repo_updated_hwm_table(SQLModel, table=True):
+    __tablename__ = "repo_updated_hwm_table"
+    updated_hwm: datetime | None = Field(default=None, primary_key=True)
+
+
+class LicenseResult(SQLModel, table=True):
+    uri: str | None = Field(default=None, primary_key=True)
+    license: str | None = Field(default=None, primary_key=True)
+    found: str
+    status: str
+    repo: Optional[str]
+
+
+class License(BaseModel):
+    results: List[LicenseResult]

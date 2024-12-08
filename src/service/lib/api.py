@@ -29,3 +29,13 @@ def call_post(endpoint: str, data: dict = {}) -> dict:
         response = requests.post(url, headers=headers, data=json.dumps(data))
 
     return response.json()
+
+
+def call_aql(query: str) -> dict:
+    JF_URL = app_config.JF_URL
+    url = f"{JF_URL}/artifactory/api/search/aql"
+    headers = auth_heather
+    headers["Content-Type"] = "text/plain"
+    response = requests.post(url, headers=headers, data=query)
+
+    return response.json()

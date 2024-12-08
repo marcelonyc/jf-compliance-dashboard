@@ -17,7 +17,7 @@ import os
 os.environ['RUN_MODE'] = 'alembic'
 from src.config.app_config import get_settings
 app_config = get_settings()
-db_type ='postgresql'
+db_type = 'postgresql'
 if 'sqlite' in app_config.db_url:
     db_type = 'sqlite'
 
