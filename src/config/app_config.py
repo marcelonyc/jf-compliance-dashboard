@@ -47,7 +47,7 @@ class AppConfig:
             self.JF_URL = config.get("jfrog", "jf_url")
             self.JF_TOKEN = config.get("jfrog", "jf_token")
         else:
-            self.db_url = f"{os.getenv('DB_DRIVER')}://{os.getenv('JFROG_USER')}:{os.getenv('JFROG_PASSWORD')}@{os.getenv('DATABASE_HOST')}:{os.getenv('DATABASE_PORT')}/{os.getenv('JFROG_DB')}"
+            self.db_url = f"{os.getenv('DB_DRIVER')}://{os.getenv('JFROG_USER')}:{os.getenv('JFROG_PASSWORD')}@{os.getenv('JFROG_DATABASE_HOST')}:{os.getenv('DATABASE_PORT')}/{os.getenv('JFROG_DB')}"
 
             # Logging
             self.log_level = os.getenv("LOG_LEVEL").upper()
@@ -69,6 +69,7 @@ class AppConfig:
             self.JFROG_UPDATE_LONG_INTERVAL = int(
                 os.getenv("JFROG_UPDATE_LONG_INTERVAL")
             )
+            self.REDIS_HOST = os.getenv("REDIS_HOST", "jfrog_redis")
 
 
 @lru_cache
