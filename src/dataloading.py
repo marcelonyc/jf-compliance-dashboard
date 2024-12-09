@@ -15,12 +15,13 @@ import logging
 logging.basicConfig()
 logging.getLogger("sqlalchemy.engine").setLevel(logging.CRITICAL)
 
+app_settings = get_settings()
+
 q = Queue(
-    connection=Redis(host="redis", port=6379, db=1), default_timeout=10000
+    connection=Redis(host=app_settings.REDIS_HOST, port=6379, db=1),
+    default_timeout=10000,
 )
 scheduler = Scheduler(queue=q, connection=q.connection)
-
-app_settings = get_settings()
 
 
 scheduler.schedule(

@@ -3,19 +3,19 @@
 #     driver: bridge
 #
 x-dashboard-app-depends-on: &dashboard-app-depends-on
-  redis:
+  jfrog_redis:
     condition: service_started
   jfrog_db:
     condition: service_healthy
     restart: true
 
 services:
-  redis:
+  jfrog_redis:
     image: redis:7
     container_name: dashboard-app-redis
     restart: unless-stopped
     volumes:
-      - redis_db:/data
+      - jfrog_redis_db:/data
   jfrog_db:
     env_file:
       - path: docker/.env # default
@@ -58,5 +58,5 @@ services:
 volumes:
   jfrog_db:
     external: false
-  redis_db:
+  jfrog_redis_db:
     external: false

@@ -9,6 +9,7 @@ Table of Content
     - [Data Loader Only](#dataloader-only)
 - [Import Dashboards](#import-dashboards)
 - [Login to Superset](#login-to-superset)
+- [Clean Up](#clean-up)
 - [Other endpoints](#other-endpoints)
     - [Job Queue](#job-queue)
 
@@ -38,27 +39,41 @@ This setup includes the data loader and a version of Superset
 
 ### Dataloader only 
 
->WORK IN PROGRESS: FOLLOW THE ALL-IN_ONE SETUP AND SKIP TO [Import Dashboards](#import-dashboards)
+This setup runs the data loader using and Superset with different compose files. Since we do not want to maintain the Superset files, this is the best way to configure the environment. Also, you might want to use a different BI tool. For that, we expose the Postgres db from the data loader to the localhost. 
 
-This setup does not iclude Superset. It exposes the Postgres db port to the localhost.
-
+#### Deploy the data loader
 1. Clone this repo
 2. Make a copy of docker/.env-jfrog as docker/.env-local-jfrog (this file is included in .gitignore)
     - The file must be in the same location as .env-jfrog and exact name.
 3. Add values for JF_URL and JF_TOKEN 
-4. From the root directory run `docker compose -f e -f  docker-dataloader-only.yaml --project-name jfrog-dashboard up`
+4. From the root directory run:
     - We add `project-name` to create a docker network we can share with a Superset deployment
-5. Clone Superset (https://github.com/apache/superset.git)
+
+```bash
+docker compose -f  docker-dataloader-only.yaml --project-name jfrog-dashboard up
+```
+
+#### Deploy Superset
+If you choose to build your own dashboards using a different BI tools, skip this.
+1. Clone Superset (https://github.com/apache/superset.git)
     - Do not clone under the root of the data loader
-6. Start Superset 
-    - (Optional) Make a copy of docker/.env as docker/.env-local (this file is included in .gitignore)
-    - `docker compose e -f  docker-compose-non-dev.yml --project-name jfrog-dashboard up`
+2. Start Superset 
+    - Make a copy of docker/.env as docker/.env-local (this file is included in .gitignore)
+    - Edit docker/.env-local and change SUPERSET_LOAD_EXAMPLES to no (unless you want the examples)
+    
+
+```bash
+docker compose -f docker-compose-non-dev.yml --project-name jfrog-dashboard up
+```
 
 ## Import Dashboards
+This step applies only if you deployed Superset in the same docker project name as the data loader.
 
 From the root directory of this project run 
 
-`# ./import-dashboards.sh`
+```bash
+# ./import-dashboards.sh
+```
 
 ## Login to Superset
 Once the environment is up go to http://localhost:8088
@@ -69,6 +84,35 @@ Default credentials
 
 
 For more information on Apache Superset, visit [Superset](https://superset.apache.org).
+
+## Clean Up
+Do you want to start over? Clean up the installation 
+
+### Clean up data loader
+
+Stop and remove running containers:
+```bash
+docker compose -f  docker-dataloader-only.yaml --project-name jfrog-dashboard stop
+docker compose -f  docker-dataloader-only.yaml --project-name jfrog-dashboard rm
+```
+
+Remove docker volumes
+```bash
+docker volume rm jfrog-dashboard_jfrog_db jfrog-dashboard_redis_db
+```
+
+### Clean up Superset
+Run these from the Superset root directory (Clone location)
+Stop and remove running containers:
+```bash
+docker compose -f  docker-compose-non-dev.yml --project-name jfrog-dashboard stop
+docker compose -f  docker-compose-non-dev.yml --project-name jfrog-dashboard rm
+```
+
+Remove Docker volumes
+```bash
+docker volume rm jfrog-dashboard_db_home jfrog-dashboard_redis jfrog-dashboard_superset_home
+```
 
 ## Other endpoints
 

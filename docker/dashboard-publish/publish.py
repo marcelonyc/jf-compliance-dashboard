@@ -10,7 +10,7 @@ expand_dir = f"/tmp/{uuid.uuid4()}"
 expand_dir = exports_dir
 JFROG_USER = os.getenv("JFROG_USER")
 JFROG_PASSWORD = os.getenv("JFROG_PASSWORD")
-DATABASE_HOST = os.getenv("DATABASE_HOST")
+JFROG_DATABASE_HOST = os.getenv("JFROG_DATABASE_HOST")
 
 files = os.listdir(exports_dir)
 os.makedirs(expand_dir, exist_ok=True)
@@ -43,7 +43,7 @@ def change_dbs_url(dir):
             for line in lines:
                 if line.startswith("sqlalchemy_uri"):
                     file.write(
-                        f"sqlalchemy_uri: postgresql+psycopg2://{JFROG_USER}:{JFROG_PASSWORD}@{DATABASE_HOST}:5432/jfrog\n"
+                        f"sqlalchemy_uri: postgresql+psycopg2://{JFROG_USER}:{JFROG_PASSWORD}@{JFROG_DATABASE_HOST}:5432/jfrog\n"
                     )
                 else:
                     file.write(line)
