@@ -1,4 +1,7 @@
 # JFrog Compliance Dashboard
+
+![Violation Dashboard](assets/violations.png)
+
 This project provides a scheduler to regularly download data from JFrog and Dashboards using Apache Superset to visualize.
 
 Table of Content
