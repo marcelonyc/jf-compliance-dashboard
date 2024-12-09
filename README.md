@@ -5,8 +5,10 @@ Table of Content
 
 - [Available Data](#available-data)
 - [Setup](#setup)
-    - [All-in-One setup](#all-in-one-setup)
-    - [Data Loader Only](#dataloader-only)
+    - [Data Loader + Superset (Recommended)](#dataloader-plus-superset)
+        - [Deploy the data loader](#deploy-the-data-loader)
+        - [Deploy Superset](#deploy-superset)
+    - [All-in-One setup](#all-in-one-setup)        
 - [Import Dashboards](#import-dashboards)
 - [Login to Superset](#login-to-superset)
 - [Clean Up](#clean-up)
@@ -37,9 +39,9 @@ This setup includes the data loader and a version of Superset
 * Loading the data runs on a schedule. It might take a few minutes to complete the load
 
 
-### Dataloader only 
+### Dataloader Plus Superset
 
-This setup runs the data loader using and Superset with different compose files. Since we do not want to maintain the Superset files, this is the best way to configure the environment. Also, you might want to use a different BI tool. For that, we expose the Postgres db from the data loader to the localhost. 
+This setup runs the data loader using and Superset with different compose files. It takes more steps to set up, but since we do not want to maintain the Superset files, this is the best way to configure the environment. Also, you might want to use a different BI tool. For that, we expose the Postgres db from the data loader to the localhost. 
 
 #### Deploy the data loader
 1. Clone this repo
