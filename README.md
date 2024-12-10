@@ -11,7 +11,7 @@ Table of Content
     - [Data Loader + Superset (Recommended)](#dataloader-plus-superset)
         - [Deploy the data loader](#deploy-the-data-loader)
         - [Deploy Superset](#deploy-superset)
-    - [All-in-One setup  (<span style="color: red">Deprecated</span>)](#all-in-one-setup)        
+    - [All-in-One setup  (<font color="red">Deprecated</font>)](#all-in-one-setup)        
 - [Import Dashboards](#import-dashboards)
 - [Login to Superset](#login-to-superset)
 - [Clean Up](#clean-up)
@@ -59,7 +59,7 @@ docker compose -f docker-compose-non-dev.yml --project-name jfrog-dashboard up
 [Go to Import Dashboarads](#import-dashboards)
 
 
-### All in One Setup (<span style="color: red">Deprecated</span>)
+### All in One Setup (<font color="red">Deprecated</font>)
 This setup includes the data loader and a version of Superset
 
 1. Clone this repo
