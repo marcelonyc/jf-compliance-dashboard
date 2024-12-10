@@ -131,3 +131,5 @@ docker/.env-local
 .DS_Store
 docker/.env-local-jfrog
 .DS_Store
+docker/.DS_Store
+docker/.DS_Store
