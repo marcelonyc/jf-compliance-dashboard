@@ -11,7 +11,7 @@ Table of Content
     - [Data Loader + Superset (Recommended)](#dataloader-plus-superset)
         - [Deploy the data loader](#deploy-the-data-loader)
         - [Deploy Superset](#deploy-superset)
-    - [All-in-One setup](#all-in-one-setup)        
+    - [All-in-One setup  (<span style="color: red">Deprecated</span>)](#all-in-one-setup)        
 - [Import Dashboards](#import-dashboards)
 - [Login to Superset](#login-to-superset)
 - [Clean Up](#clean-up)
@@ -26,23 +26,9 @@ Table of Content
 - Licenses
 
 ## Setup
+There are two setup options. One includes all the components in a single docker compose file. The other deploys the dataloader only and uses Superset as a standalone deployment. [Superset](https://superset.apache.org) is an Apache project not mantained in this repo. 
 
-### All in One Setup
-This setup includes the data loader and a version of Superset
-
-1. Clone this repo
-2. Make a copy of docker/.env as docker/.env-local (this file is included in .gitignore)
-    - The file must be in the same location as .env-jfrog and exact name.
-3. Add values for JF_URL and JF_TOKEN 
-4. From the root directory run `docker compose up`
-
-* The initial start takes a few minutes. Give it 10-20 minutes on the first `up`
-* Wait until you see `dashbosard-app` displaying output on the logs before you continue
-* In some instances, Superset did not come up correctly. run `docker compose stop` and `docker compose up` to restart.
-* Loading the data runs on a schedule. It might take a few minutes to complete the load
-
-
-### Dataloader Plus Superset
+### Dataloader Plus Superset (Recommended)
 
 This setup runs the data loader and Superset with different compose files. It takes more steps to set up, but since we do not want to maintain the Superset files, this is the best way to configure the environment. Also, you might want to use a different BI tool. For that, we expose the Postgres db from the data loader to the localhost. 
 
@@ -70,6 +56,24 @@ If you choose to build your own dashboards using a different BI tools, skip this
 ```bash
 docker compose -f docker-compose-non-dev.yml --project-name jfrog-dashboard up
 ```
+[Go to Import Dashboarads](#import-dashboards)
+
+
+### All in One Setup (<span style="color: red">Deprecated</span>)
+This setup includes the data loader and a version of Superset
+
+1. Clone this repo
+2. Make a copy of docker/.env as docker/.env-local (this file is included in .gitignore)
+    - The file must be in the same location as .env-jfrog and exact name.
+3. Add values for JF_URL and JF_TOKEN 
+4. From the root directory run `docker compose up`
+
+* The initial start takes a few minutes. Give it 10-20 minutes on the first `up`
+* Wait until you see `dashbosard-app` displaying output on the logs before you continue
+* In some instances, Superset did not come up correctly. run `docker compose stop` and `docker compose up` to restart.
+* Loading the data runs on a schedule. It might take a few minutes to complete the load
+
+[Go to Import Dashboarads](#import-dashboards)
 
 ## Import Dashboards
 This step applies only if you deployed Superset in the same docker project name as the data loader.
